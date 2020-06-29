@@ -1,12 +1,10 @@
 package com.lgh.commercial;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 class CommercialApplicationTests {
     @Test
-    void testLRUCache() {
+    public void testLRUCache() {
         LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );
 
         cache.put(1, 1);
@@ -20,4 +18,20 @@ class CommercialApplicationTests {
         System.out.println(cache.get(4));       // 返回  4
     }
 
+    @Test
+    public void testThread() {
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("a start");
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("a is done");
+    }
 }
